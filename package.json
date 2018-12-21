@@ -12,14 +12,15 @@
     "heroku": "node index.js",
     "travis": "npm run mocha"
   },
-  "author": "Joe Turner <jturner@thinkful.com>",
+  "author": "Cheezburger",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "knex": "^0.15.2",
     "mongoose": "^5.2.6",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
     "pg": "^7.4.3"
   },
   "devDependencies": {
