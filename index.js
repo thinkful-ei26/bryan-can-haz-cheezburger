@@ -9,6 +9,10 @@ const { dbConnect } = require('./db-mongoose')
 // const {dbConnect} = require('./db-knex');
 
 const app = express()
+const cheese = require('./seedCheese')
+const simbDB = require('./simDB')
+const cheeses = simbDB.initialize(cheese)
+
 
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
@@ -43,6 +47,25 @@ app.get('/api/cheeses', (err, res) => {
     'Blue Wensleydale',
     'Yorkshire Blue',
   ])
+})
+
+app.post('/api/cheeses', (req, res, next) => {
+  const cheeses = req.body
+  const newCheese = { cheeses }
+  cheeses.create(newCheese, (err, data) => {
+    if (err) {
+      return next(err)
+    }
+    if (data) {
+      console.log(res.body)
+      res
+        .location(`http://${req.headers.host}/api/cheeses/`)
+        .status(201)
+        .json(data)
+    } else {
+      next()
+    }
+  })
 })
 
 function runServer(port = PORT) {
